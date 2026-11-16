@@ -5,7 +5,7 @@ window.SLUPMX_PRODUCTS = [
  {
     id: "playera 100% algodon",
     name: "Playera 100% algodon",
-    category: "Calzado Y Ropa",
+    category: "Calzado-Y-Ropa",
     description: "Esta playera de algodón está pensada para quienes buscan una prenda cómoda y versátil para el día a día. Su confección en algodón favorece una sensación agradable al contacto con la piel y la hace adecuada para diferentes momentos de uso. El diseño de manga corta y cuello redondo ofrece un estilo sencillo que se adapta con facilidad a distintas combinaciones. Su forma de calce recto aporta una silueta cómoda, sin limitar el movimiento. Por su carácter unisex, funciona bien para personas que prefieren prendas prácticas y fáciles de integrar en su rutina. Es una opción útil para actividades cotidianas, escuela, trabajo, momentos casuales o jornadas con mayor movimiento. También resulta apropiada para uso deportivo ligero y para actividades al aire libre, donde se valora una prenda fresca y funcional. El algodón como material principal ayuda a mantener una experiencia de uso agradable en climas variados. Si buscas una playera sencilla, cómoda y fácil de combinar, esta propuesta reúne lo necesario para acompañarte en distintos contextos sin complicaciones. Su diseño clásico la convierte en una prenda práctica para uso frecuente. Sin garantía.",
     image: "https://i.imgur.com/kJilpDp.jpeg",
     price: 299,
