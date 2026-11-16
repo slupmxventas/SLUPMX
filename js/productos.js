@@ -2,24 +2,23 @@
    Las imágenes deben ser enlaces directos HTTPS de Imgur, por ejemplo https://i.imgur.com/ID.webp
    Usa enlaces completos de afiliado cuando corresponda. */
 window.SLUPMX_PRODUCTS = [
-  {
-    id: "producto-001",
-    name: "Vaso térmico",
+ {
+    id: "playera 100% algodon",
+    name: "Playera 100% algodon",
     category: "Hogar",
-    description: "Ejemplo de producto propio. Sustituye texto, precio e imagen.",
-    image: "https://placehold.co/800x600/f3f5f8/183653?text=Imagen+desde+Imgur",
+    description: "Esta playera de algodón está pensada para quienes buscan una prenda cómoda y versátil para el día a día. Su confección en algodón favorece una sensación agradable al contacto con la piel y la hace adecuada para diferentes momentos de uso. El diseño de manga corta y cuello redondo ofrece un estilo sencillo que se adapta con facilidad a distintas combinaciones. Su forma de calce recto aporta una silueta cómoda, sin limitar el movimiento. Por su carácter unisex, funciona bien para personas que prefieren prendas prácticas y fáciles de integrar en su rutina. Es una opción útil para actividades cotidianas, escuela, trabajo, momentos casuales o jornadas con mayor movimiento. También resulta apropiada para uso deportivo ligero y para actividades al aire libre, donde se valora una prenda fresca y funcional. El algodón como material principal ayuda a mantener una experiencia de uso agradable en climas variados. Si buscas una playera sencilla, cómoda y fácil de combinar, esta propuesta reúne lo necesario para acompañarte en distintos contextos sin complicaciones. Su diseño clásico la convierte en una prenda práctica para uso frecuente. Sin garantía.",
+    image: "https://i.imgur.com/kJilpDp.jpeg",
     price: 299,
     oldPrice: 349,
-    badge: "Ejemplo",
+    badge: "En venta",
     recommended: true,
     links: {
-      mercadoLibre: "",
+      mercadoLibre: "https://meli.la/2wjoe1m",
       amazon: "",
-      facebook: "",
+      facebook: "https://www.facebook.com/share/1Cofmv34JU/",
       own: ""
     }
   },
-
   /*estos son los productos afiliados a meli*/
   {
     id: "producto-002",
