@@ -16,7 +16,7 @@ window.SLUPMX_PRODUCTS = [
       mercadoLibre: "https://meli.la/2wjoe1m",
       amazon: "",
       facebook: "https://www.facebook.com/share/1Cofmv34JU/",
-      own: ""
+      own: "https://mpago.la/1J31kGQ"
     }
   },
   /*estos son los productos afiliados a meli*/
