@@ -346,6 +346,73 @@ const productCard = p => {
   }
 
   // La suscripción ahora se administra mediante el formulario integrado de Brevo.
+  
+  const checkoutForm = $("#checkoutForm");
+
+  checkoutForm?.addEventListener("submit", async e => {
+    e.preventDefault();
+
+    const submitBtn = $("#checkoutSubmit");
+
+    if (!cfg.supabaseUrl || !cfg.supabasePublishableKey) {
+      toast("Falta configurar la conexión con Supabase.");
+      return;
+    }
+
+    const formData = new FormData(checkoutForm);
+
+    const order = {
+      product_id: formData.get("product_id"),
+      variant: formData.get("variant"),
+      quantity: Number(formData.get("quantity")),
+      customer_name: formData.get("customer_name"),
+      customer_email: formData.get("customer_email"),
+      customer_whatsapp: formData.get("customer_whatsapp"),
+      state: formData.get("state"),
+      municipality: formData.get("municipality"),
+      postal_code: formData.get("postal_code"),
+      neighborhood: formData.get("neighborhood"),
+      street: formData.get("street"),
+      delivery_references: formData.get("delivery_references")
+    };
+
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Preparando pedido...";
+
+    try {
+      const response = await fetch(
+        `${cfg.supabaseUrl}/functions/v1/slupmx-orders`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": cfg.supabasePublishableKey,
+            "Authorization": `Bearer ${cfg.supabasePublishableKey}`
+          },
+          body: JSON.stringify(order)
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success || !data.checkout_url) {
+        throw new Error(data.message || "No se pudo crear el pedido.");
+      }
+
+      toast("Pedido creado. Abriendo Mercado Pago...");
+
+      window.location.href = data.checkout_url;
+
+    } catch (error) {
+      console.error("Error al crear pedido:", error);
+      toast(error.message || "No se pudo procesar el pedido.");
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
+
   // No se necesita un controlador de envío en este archivo.
 
   renderProducts();
