@@ -8,4 +8,6 @@ window.SLUPMX_CONFIG = {
   subscriptionProviderUrl: "", // URL de formulario/proveedor de correo o membresía.
   currency: "MXN",
   locale: "es-MX"
+supabaseUrl: "https://rgnmbokenkaliqgwqaow.supabase.co",
+supabasePublishableKey: "sb_publishable_V0-1_FlPxE5AD8Z2kkS1zQ_6Z2W4AJ6"
 };
