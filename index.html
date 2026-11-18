@@ -203,6 +203,63 @@
   </footer>
 
   <a class="whatsapp-float" id="whatsappFloat" href="#" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"><span>◔</span><b>WhatsApp</b></a>
+  
+<dialog id="checkoutDialog" class="checkout-dialog">
+  <div class="checkout-content">
+    <button type="button" id="closeCheckout" class="checkout-close" aria-label="Cerrar">×</button>
+
+    <h2>Completa tu pedido</h2>
+    <p>Proporciona tus datos para preparar el envío.</p>
+
+    <form id="checkoutForm">
+      <input type="hidden" name="product_id" id="checkoutProductId">
+
+      <label>Producto</label>
+      <p id="checkoutProductName"></p>
+
+      <label for="checkoutVariant">Talla o variante</label>
+      <input id="checkoutVariant" name="variant" type="text" placeholder="Ej. M">
+
+      <label for="checkoutQuantity">Cantidad</label>
+      <input id="checkoutQuantity" name="quantity" type="number" min="1" max="10" value="1" required>
+
+      <label for="customerName">Nombre completo</label>
+      <input id="customerName" name="customer_name" type="text" required>
+
+      <label for="customerEmail">Correo electrónico</label>
+      <input id="customerEmail" name="customer_email" type="email" required>
+
+      <label for="customerWhatsapp">WhatsApp</label>
+      <input id="customerWhatsapp" name="customer_whatsapp" type="tel" required>
+
+      <label for="customerState">Estado</label>
+      <input id="customerState" name="state" type="text" required>
+
+      <label for="customerMunicipality">Municipio</label>
+      <input id="customerMunicipality" name="municipality" type="text" required>
+
+      <label for="customerPostal">Código postal</label>
+      <input id="customerPostal" name="postal_code" type="text" required>
+
+      <label for="customerNeighborhood">Colonia</label>
+      <input id="customerNeighborhood" name="neighborhood" type="text" required>
+
+      <label for="customerStreet">Calle y número</label>
+      <input id="customerStreet" name="street" type="text" required>
+
+      <label for="customerReferences">Referencias de entrega (opcional)</label>
+      <textarea id="customerReferences" name="delivery_references"></textarea>
+
+      <p>Envío: $150 MXN</p>
+      <p id="checkoutTotal"></p>
+
+      <button type="submit" id="checkoutSubmit" class="btn btn-primary">
+        Continuar al pago
+      </button>
+    </form>
+  </div>
+</dialog>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
     if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
