@@ -7,7 +7,7 @@ window.SLUPMX_CONFIG = {
   ecosystemUrl: "https://nuvary.github.io/NUVARY-ECOSYSTEM-v3.1/",
   subscriptionProviderUrl: "", // URL de formulario/proveedor de correo o membresía.
   currency: "MXN",
-  locale: "es-MX"
+  locale: "es-MX",
 supabaseUrl: "https://rgnmbokenkaliqgwqaow.supabase.co",
 supabasePublishableKey: "sb_publishable_V0-1_FlPxE5AD8Z2kkS1zQ_6Z2W4AJ6"
 };
