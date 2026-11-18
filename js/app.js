@@ -44,19 +44,26 @@
     }, 2400);
   };
 
-  const productCard = p => {
-    const links = [
-      ["mercadoLibre", "Mercado Libre", "ml"],
-      ["amazon", "Amazon", "amazon"],
-      ["facebook", "Facebook", "facebook"],
-      ["own", "Comprar aquí", "own"]
-    ].map(([key, label, cls]) => {
-      const url = safeUrl(p.links?.[key]);
+  
+const productCard = p => {
+  const links = [
+    ["mercadoLibre", "Mercado Libre", "ml"],
+    ["amazon", "Amazon", "amazon"],
+    ["facebook", "Facebook", "facebook"]
+  ].map(([key, label, cls]) => {
+    const url = safeUrl(p.links?.[key]);
 
-      return url
-        ? `<a class="buy-link ${cls}" href="${esc(url)}" target="_blank" rel="sponsored nofollow noopener">${label}</a>`
-        : "";
-    }).filter(Boolean).join("");
+    return url
+      ? `<a class="buy-link ${cls}" href="${esc(url)}" target="_blank" rel="sponsored nofollow noopener">${label}</a>`
+      : "";
+  }).filter(Boolean).join("");
+
+  const ownButton = `
+    <button class="buy-link own" type="button"
+      data-buy-product="${esc(p.id)}">
+      Comprar aquí
+    </button>
+  `;
 
     const shareData = encodeURIComponent(JSON.stringify({
       id: p.id,
@@ -92,9 +99,10 @@
 
           <p class="buy-label">Elige dónde comprar</p>
 
-          <div class="buy-links">
-            ${links || `<span class="product-description">Enlaces de compra próximamente.</span>`}
-          </div>
+         <div class="buy-links">
+  ${links}
+  ${ownButton}
+</div>
 
           <button class="product-share" type="button" data-share="${esc(shareData)}">
             ↗ Compartir producto
