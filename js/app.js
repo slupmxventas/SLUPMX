@@ -176,6 +176,33 @@ const productCard = p => {
   });
 
   $("#productGrid")?.addEventListener("click", async e => {
+        const buyBtn = e.target.closest("[data-buy-product]");
+
+    if (buyBtn) {
+      const product = products.find(
+        p => p.id === buyBtn.dataset.buyProduct
+      );
+
+      if (!product) return;
+
+      const dialog = $("#checkoutDialog");
+
+      if (!dialog) {
+        toast("No se encontró el formulario de compra.");
+        return;
+      }
+
+      $("#checkoutProductId").value = product.id;
+      $("#checkoutProductName").textContent = product.name;
+      $("#checkoutVariant").value = "";
+      $("#checkoutQuantity").value = 1;
+
+      $("#checkoutTotal").textContent =
+        `Total con envío: ${money(Number(product.price) + 150)}`;
+
+      dialog.showModal();
+      return;
+    }
     const btn = e.target.closest("[data-share]");
     if (!btn) return;
 
