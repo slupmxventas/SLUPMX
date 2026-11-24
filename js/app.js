@@ -38,32 +38,30 @@
     el.classList.add("show");
 
     clearTimeout(toast.timer);
-
-    toast.timer = setTimeout(() => {
-      el.classList.remove("show");
-    }, 2400);
+    toast.timer = setTimeout(() => el.classList.remove("show"), 2400);
   };
 
-  
-const productCard = p => {
-  const links = [
-    ["mercadoLibre", "Mercado Libre", "ml"],
-    ["amazon", "Amazon", "amazon"],
-    ["facebook", "Facebook", "facebook"]
-  ].map(([key, label, cls]) => {
-    const url = safeUrl(p.links?.[key]);
+  // Solo estos productos pueden usar el checkout propio de SLUPMX.
+  const ownProductIds = new Set([
+    "playera 100% algodon"
+  ]);
 
-    return url
-      ? `<a class="buy-link ${cls}" href="${esc(url)}" target="_blank" rel="sponsored nofollow noopener">${label}</a>`
+  const productCard = p => {
+    const links = [
+      ["mercadoLibre", "Mercado Libre", "ml"],
+      ["amazon", "Amazon", "amazon"],
+      ["facebook", "Facebook", "facebook"]
+    ].map(([key, label, cls]) => {
+      const url = safeUrl(p.links?.[key]);
+
+      return url
+        ? `<a class="buy-link ${cls}" href="${esc(url)}" target="_blank" rel="sponsored nofollow noopener">${label}</a>`
+        : "";
+    }).filter(Boolean).join("");
+
+    const ownButton = ownProductIds.has(p.id)
+      ? `<button class="buy-link own" type="button" data-buy-product="${esc(p.id)}">Comprar aquí</button>`
       : "";
-  }).filter(Boolean).join("");
-
-  const ownButton = `
-    <button class="buy-link own" type="button"
-      data-buy-product="${esc(p.id)}">
-      Comprar aquí
-    </button>
-  `;
 
     const shareData = encodeURIComponent(JSON.stringify({
       id: p.id,
@@ -72,7 +70,6 @@ const productCard = p => {
 
     return `
       <article class="product-card" data-category="${esc(p.category)}">
-
         <div class="product-image-wrap">
           <img
             class="product-image"
@@ -87,9 +84,7 @@ const productCard = p => {
 
         <div class="product-info">
           <span class="product-category">${esc(p.category || "Producto")}</span>
-
           <h3>${esc(p.name)}</h3>
-
           <p class="product-description">${esc(p.description)}</p>
 
           <div class="product-price">
@@ -99,16 +94,15 @@ const productCard = p => {
 
           <p class="buy-label">Elige dónde comprar</p>
 
-         <div class="buy-links">
-  ${links}
-  ${ownButton}
-</div>
+          <div class="buy-links">
+            ${links}
+            ${ownButton}
+          </div>
 
           <button class="product-share" type="button" data-share="${esc(shareData)}">
             ↗ Compartir producto
           </button>
         </div>
-
       </article>
     `;
   };
@@ -176,14 +170,12 @@ const productCard = p => {
   });
 
   $("#productGrid")?.addEventListener("click", async e => {
-        const buyBtn = e.target.closest("[data-buy-product]");
+    const buyBtn = e.target.closest("[data-buy-product]");
 
     if (buyBtn) {
-      const product = products.find(
-        p => p.id === buyBtn.dataset.buyProduct
-      );
+      const product = products.find(p => p.id === buyBtn.dataset.buyProduct);
 
-      if (!product) return;
+      if (!product || !ownProductIds.has(product.id)) return;
 
       const dialog = $("#checkoutDialog");
 
@@ -203,21 +195,22 @@ const productCard = p => {
       dialog.showModal();
       return;
     }
+
     const btn = e.target.closest("[data-share]");
     if (!btn) return;
 
-    const data = JSON.parse(decodeURIComponent(btn.dataset.share));
-
-    const url = new URL(location.href);
-    url.hash = "productos";
-
-    const share = {
-      title: data.name,
-      text: `Mira este producto en SLUPMX: ${data.name}`,
-      url: url.href
-    };
-
     try {
+      const data = JSON.parse(decodeURIComponent(btn.dataset.share));
+
+      const url = new URL(location.href);
+      url.hash = "productos";
+
+      const share = {
+        title: data.name,
+        text: `Mira este producto en SLUPMX: ${data.name}`,
+        url: url.href
+      };
+
       if (navigator.share) {
         await navigator.share(share);
       } else if (navigator.clipboard?.writeText) {
@@ -227,9 +220,7 @@ const productCard = p => {
         toast("Tu navegador no permite compartir automáticamente.");
       }
     } catch (err) {
-      if (err.name !== "AbortError") {
-        toast("No se pudo compartir.");
-      }
+      if (err.name !== "AbortError") toast("No se pudo compartir.");
     }
   });
 
@@ -237,12 +228,10 @@ const productCard = p => {
     const link = e.target.closest("[data-focus-product]");
     if (!link) return;
 
-    const id = link.dataset.focusProduct;
-    const item = products.find(p => p.id === id);
+    const item = products.find(p => p.id === link.dataset.focusProduct);
 
     if (item) {
       const search = $("#productSearch");
-
       if (search) search.value = item.name;
 
       activeCategory = "Todos";
@@ -278,16 +267,13 @@ const productCard = p => {
              href="${esc(safeUrl(p.url))}"
              target="_blank"
              rel="noopener">
-
             <span class="platform-icon">${esc(p.icon || "↗")}</span>
-
             <span>
               <strong>${esc(p.name)}</strong>
               <small>${esc(p.description || "Visitar plataforma")}</small>
             </span>
           </a>
         `).join("") +
-
       `
         <div class="platform-card">
           <span class="platform-icon">+</span>
@@ -324,7 +310,6 @@ const productCard = p => {
     if (!nav) return;
 
     const open = nav.classList.toggle("open");
-
     $("#menuToggle").setAttribute("aria-expanded", String(open));
   });
 
@@ -340,13 +325,8 @@ const productCard = p => {
   });
 
   const currentYear = $("#currentYear");
+  if (currentYear) currentYear.textContent = new Date().getFullYear();
 
-  if (currentYear) {
-    currentYear.textContent = new Date().getFullYear();
-  }
-
-  // La suscripción ahora se administra mediante el formulario integrado de Brevo.
-  
   const checkoutForm = $("#checkoutForm");
 
   checkoutForm?.addEventListener("submit", async e => {
@@ -397,11 +377,10 @@ const productCard = p => {
       const data = await response.json();
 
       if (!response.ok || !data.success || !data.checkout_url) {
-        throw new Error(data.message || "No se pudo crear el pedido.");
+        throw new Error(data.error || data.message || "No se pudo crear el pedido.");
       }
 
       toast("Pedido creado. Abriendo Mercado Pago...");
-
       window.location.href = data.checkout_url;
 
     } catch (error) {
@@ -412,8 +391,6 @@ const productCard = p => {
       submitBtn.textContent = originalText;
     }
   });
-
-  // No se necesita un controlador de envío en este archivo.
 
   renderProducts();
   renderPosts();
