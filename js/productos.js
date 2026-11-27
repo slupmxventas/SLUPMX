@@ -95,7 +95,7 @@ window.SLUPMX_PRODUCTS = [
   },
 
   /* PRODUCTOS PROPIOS: PLANTILLAS PARA FUTUROS PRODUCTOS */
-  {
+ /* {
     id: "propio-accesorio-001",
     name: "Accesorio de uso diario",
     category: "Accesorios",
@@ -128,7 +128,8 @@ window.SLUPMX_PRODUCTS = [
       facebook: "",
       own: ""
     }
-  },
+  },*/
+  
   /*{
     id: "producto-prueba-1-peso",
     name: "Producto de prueba SLUPMX",
