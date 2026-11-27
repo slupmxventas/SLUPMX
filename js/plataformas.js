@@ -3,6 +3,7 @@
    Deja url vacío para ocultar una plataforma hasta que tengas el enlace. */
 window.SLUPMX_PLATFORMS = [
   { name: "NUVARY Ecosystem", description: "Portal principal", icon: "N", url: "https://nuvary.github.io/NUVARY-ECOSYSTEM-v3.1/" },
+  { name: "DΞNNIS+", description: "Opinion publica", icon: "D", url: "https://nuvary.github.io/DENNIS/" },
   { name: "Wix", description: "Sitio web", icon: "W", url: "" },
   { name: "Blogger", description: "Blog y publicaciones", icon: "B", url: "" },
   { name: "Facebook", description: "Comunidad y novedades", icon: "f", url: "" },
