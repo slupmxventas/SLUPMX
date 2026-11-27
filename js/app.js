@@ -43,8 +43,9 @@
 
   // Solo estos productos pueden usar el checkout propio de SLUPMX.
   const ownProductIds = new Set([
-    "playera 100% algodon"
-  ]);
+  "playera 100% algodon",
+  "producto-prueba-1-peso"
+]);
 
   const productCard = p => {
     const links = [
