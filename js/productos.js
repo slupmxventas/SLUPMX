@@ -128,8 +128,7 @@ window.SLUPMX_PRODUCTS = [
       facebook: "",
       own: ""
     }
-  },*/
-  
+  },*
   /*{
     id: "producto-prueba-1-peso",
     name: "Producto de prueba SLUPMX",
