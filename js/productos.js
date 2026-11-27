@@ -129,4 +129,22 @@ window.SLUPMX_PRODUCTS = [
       own: ""
     }
   }
+     ,
+  {
+    id: "producto-prueba-1-peso",
+    name: "Producto de prueba SLUPMX",
+    category: "Pruebas",
+    description: "Producto temporal para verificar el proceso de compra y confirmación de pagos de SLUPMX.",
+    image: "https://placehold.co/800x600/f3f5f8/183653?text=Producto+de+prueba",
+    price: 1,
+    oldPrice: null,
+    badge: "Prueba",
+    recommended: false,
+    links: {
+      mercadoLibre: "",
+      amazon: "",
+      facebook: "",
+      own: ""
+    }
+  }
 ];
